@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -21,7 +22,12 @@ public class AccelerationController {
     public Optional<Acceleration> findById(@PathVariable Long id)
     {
         return this.nterface.findById(id);
+
     }
+
+    /*public List<Acceleration> findByCompanyId(@PathVariable Long companyID){
+        return this.nterface.findByCompanyId(companyID);
+    }*/
 
 
 }

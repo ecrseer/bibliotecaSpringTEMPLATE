@@ -8,5 +8,7 @@ import java.util.List;
 public interface AccelerationRepo extends CrudRepository<Acceleration,Long> {
     List<Acceleration> findAll();
 
+   // List<Acceleration> findByCompanyId(Long id);
+
 
 }

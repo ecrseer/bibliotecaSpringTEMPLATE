@@ -22,7 +22,7 @@ public class AccelerationService implements AccelerationServiceInterface {
 
     @Override
     public List<Acceleration> findByCompanyId(Long companyId) {
-        return null;
+        return null;//this.reposito.findByCompanyId(companyId);
     }
 
     @Override
