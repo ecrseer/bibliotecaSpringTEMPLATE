@@ -15,8 +15,7 @@ import java.util.Optional;
 @RequestMapping("/acceleration")
 public class AccelerationController {
 
-
-    AccelerationServiceInterface nterface;
+    @Autowired private AccelerationServiceInterface nterface;
 
     @GetMapping("/{id}")
     public Optional<Acceleration> findById(@PathVariable Long id)
