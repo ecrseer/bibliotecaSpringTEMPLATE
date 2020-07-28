@@ -15,6 +15,7 @@ import java.util.Optional;
 @RequestMapping("/acceleration")
 public class AccelerationController {
 
+
     AccelerationServiceInterface nterface;
 
     @GetMapping("/{id}")
