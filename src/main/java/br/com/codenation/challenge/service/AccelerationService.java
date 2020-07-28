@@ -2,15 +2,22 @@ package br.com.codenation.challenge.service;
 
 
 import br.com.codenation.challenge.entity.Acceleration;
+import br.com.codenation.challenge.repository.AccelerationRepo;
 import br.com.codenation.challenge.service.interfaces.AccelerationServiceInterface;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class AccelerationService implements AccelerationServiceInterface {
+    @Autowired private AccelerationRepo reposito;
+
+
     @Override
     public Optional<Acceleration> findById(Long id) {
-        return Optional.empty();
+        return this.reposito.findById(id);
     }
 
     @Override
