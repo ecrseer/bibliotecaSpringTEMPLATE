@@ -19,9 +19,9 @@ public class AccelerationController {
     @Autowired private AccelerationServiceInterface nterface;
 
     @GetMapping("/{id}")
-    public Optional<Acceleration> findById(@PathVariable Long id)
+    public Acceleration findById(@PathVariable("id") Long id)
     {
-        return this.nterface.findById(id);
+        return this.nterface.findById(id).get();
 
     }
 
