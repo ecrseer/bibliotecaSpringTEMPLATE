@@ -1,7 +1,6 @@
 package br.com.codenation.Transporte.repository;
 
 import br.com.codenation.Transporte.model.Combustivel;
-import br.com.codenation.Transporte.model.Transporte;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

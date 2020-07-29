@@ -14,7 +14,7 @@ public class TransporteController {
     @Autowired private TransporteService transporteService;
 
     @GetMapping
-    public Iterable<Transporte> findAll(Transporte tran){
+    public Iterable<Transporte> findAll(){
         return this.transporteService.findAll();
     }
 

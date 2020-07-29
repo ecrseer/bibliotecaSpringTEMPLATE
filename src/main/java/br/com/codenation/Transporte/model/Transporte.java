@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.List;
 
 @Entity
 public class Transporte {
@@ -12,7 +13,16 @@ public class Transporte {
     String nome;
     Long velocidadeMax;
 
+   // List<Combustivel> combustivel;
 
+    /*public List<Combustivel> getCombustivel() {
+        return combustivel;
+    }
+
+    public void setCombustivel(List<Combustivel> combustivel) {
+        this.combustivel = combustivel;
+    }
+*/
     public Transporte() {
         super();
     }
