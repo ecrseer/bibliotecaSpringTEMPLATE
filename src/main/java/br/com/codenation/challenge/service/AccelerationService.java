@@ -27,7 +27,12 @@ public class AccelerationService implements AccelerationServiceInterface {
 
     @Override
     public Acceleration save(Acceleration object) {
-        return null;
+        return this.reposito.save(object);
+    }
+
+    @Override
+    public List<Acceleration> findAll() {
+        return this.reposito.findAll();
     }
 
 

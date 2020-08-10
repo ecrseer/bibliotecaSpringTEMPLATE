@@ -1,5 +1,6 @@
 package br.com.codenation.challenge.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,9 +35,11 @@ public class Acceleration {
     private String slug;
 
     @ManyToOne
+    @JsonIgnore
     private Challenge challenge;
 
     @OneToMany(mappedBy = "id.acceleration")
+    @JsonIgnore
     private List<Candidate> candidates;
 
     @CreatedDate
