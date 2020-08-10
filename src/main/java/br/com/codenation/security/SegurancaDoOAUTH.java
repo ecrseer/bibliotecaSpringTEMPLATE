@@ -4,8 +4,10 @@ package br.com.codenation.security;
 import br.com.codenation.challenge.service.ChallengeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -37,6 +39,17 @@ public class SegurancaDoOAUTH
                 "/configuration/security",
                 "/swagger-ui.html",
                 "/webjars/**");
+
+
+    }
+    @Override
+    public  void configure(HttpSecurity httpSecurity) throws Exception{
+        httpSecurity.authorizeRequests()
+                .antMatchers(HttpMethod.GET,"/challenge")
+                .permitAll()
+                .antMatchers(HttpMethod.POST,"/challenge")
+                .authenticated()
+        ;
     }
 
     @Bean
