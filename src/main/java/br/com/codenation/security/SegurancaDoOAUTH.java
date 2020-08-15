@@ -32,38 +32,8 @@ public class SegurancaDoOAUTH
             throws Exception{
         return super.authenticationManagerBean();
     }
-    /*public void configure(AuthorizationServerSecurityConfigurer secuConfig) throws Exception{
-        secuConfig.tokenKeyAccess("permitAll()")
-                .checkTokenAccess("isAuthenticated()")
-                .allowFormAuthenticationForClients();
-    }*/
-
-    @Override
-    public void configure(WebSecurity web) throws Exception{
-        web.ignoring().antMatchers(HttpMethod.POST,
-                "/challenge/",
-                "/acceleration/");
-        /*web.ignoring().antMatchers("/v2/api-docs",
-                "/configuration/ui",
-                "/swagger-resources/**",
-                "/configuration/security",
-                "/swagger-ui.html",
-                "/webjars/**");*/
-
-    }
 
 
-    /*@Override
-    public  void configure(HttpSecurity httpSecurity) throws Exception{
-        System.out.println("Chamou HttpSecurity");
-        httpSecurity.csrf().disable()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.GET,"/challenge")
-                .permitAll().anyRequest().permitAll()
-
-
-        ;
-    }*/
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -75,7 +45,7 @@ public class SegurancaDoOAUTH
     @Override
     public void configure(AuthenticationManagerBuilder autBuilder)
         throws Exception{
-        autBuilder.userDetailsService(challService)
+        autBuilder.userDetailsService(this.challService)
                 .passwordEncoder(passwordEncoder());
     }
 
