@@ -11,10 +11,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 
 @EnableWebSecurity
 @EnableAuthorizationServer
@@ -22,7 +24,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 public class SegurancaDoOAUTH
         extends WebSecurityConfigurerAdapter {
 
-    @Autowired private ChallengeService challService;
+    @Autowired private UserDetailsService challService;
 
     @Bean
     @Override
@@ -30,27 +32,38 @@ public class SegurancaDoOAUTH
             throws Exception{
         return super.authenticationManagerBean();
     }
+    /*public void configure(AuthorizationServerSecurityConfigurer secuConfig) throws Exception{
+        secuConfig.tokenKeyAccess("permitAll()")
+                .checkTokenAccess("isAuthenticated()")
+                .allowFormAuthenticationForClients();
+    }*/
 
     @Override
     public void configure(WebSecurity web) throws Exception{
-        web.ignoring().antMatchers("/v2/api-docs",
+        web.ignoring().antMatchers(HttpMethod.POST,
+                "/challenge/",
+                "/acceleration/");
+        /*web.ignoring().antMatchers("/v2/api-docs",
                 "/configuration/ui",
                 "/swagger-resources/**",
                 "/configuration/security",
                 "/swagger-ui.html",
-                "/webjars/**");
-
+                "/webjars/**");*/
 
     }
-    @Override
+
+
+    /*@Override
     public  void configure(HttpSecurity httpSecurity) throws Exception{
-        httpSecurity.authorizeRequests()
+        System.out.println("Chamou HttpSecurity");
+        httpSecurity.csrf().disable()
+                .authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/challenge")
-                .permitAll()
-                .antMatchers(HttpMethod.POST,"/challenge")
-                .authenticated()
+                .permitAll().anyRequest().permitAll()
+
+
         ;
-    }
+    }*/
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -62,7 +75,7 @@ public class SegurancaDoOAUTH
     @Override
     public void configure(AuthenticationManagerBuilder autBuilder)
         throws Exception{
-        autBuilder.userDetailsService(this.challService)
+        autBuilder.userDetailsService(challService)
                 .passwordEncoder(passwordEncoder());
     }
 
