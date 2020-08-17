@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -35,7 +36,16 @@ public class SegurancaDoOAUTH
         return NoOpPasswordEncoder.getInstance();
     }
 
-
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/v2/api-docs",
+                "/configuration/ui",
+                "/swagger-resources/**",
+                "/configuration/security",
+                "/swagger-ui.html",
+                "/h2**",
+                "/webjars/**");
+    }
 
     @Override
     public void configure(AuthenticationManagerBuilder autBuilder)
@@ -43,6 +53,7 @@ public class SegurancaDoOAUTH
         autBuilder.userDetailsService(this.challService)
                 .passwordEncoder(passwordEncoder());
     }
+
 
 
 
